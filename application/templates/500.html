@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="error_message">
+    ERROR 500! Internal Server Error!
+  </div>
+
+  <div class="error_image_container">
+    <img class="error_image" width="1280" src="{{ url_for('static', filename='images/errors/500.jpg') }}" alt="Internal Server Error">
+  </div>
+{% endblock %}
+

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="error_message">
+    ERROR 415! Unsupported media type!
+  </div>
+
+  <div class="error_image_container">
+    <img class="error_image" width="1280" src="{{ url_for('static', filename='images/errors/415.png') }}" alt="Unsupported media type">
+  </div>
+{% endblock %}
+
+

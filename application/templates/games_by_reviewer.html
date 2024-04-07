@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<h2 class="main_header">Game reviews from {{ reviewer.username }}
+  <img class="rounded-circle profile-image" alt="{{ reviewer.username }}"
+    src="{{ url_for('static', filename='images/profiles_images/'+ reviewer.profile_image) }}" data-holder-rendered="true"
+    data-bs-toggle="tooltip" data-bs-placement="top" title="{{ reviewer.username }}">
+</h2>
+
+<hr>
+
+<!-- Τα παρακάτω δύο κουμπιά θα πρέπει να ταξινομούν τη λίστα ανά βαθμολογία ή έτους πρώτης προβολής αντίστοιχα -->
+
+<div class="align-buttons">
+  <a class="btn btn-primary btn-sm mt-1 mb-1"
+    href="{{ url_for('games_by_reviewer', reviewer_id=reviewer.id, ordering_by='rating') }}">Sort based on rating</a>
+  <a class="btn btn-primary btn-sm mt-1 mb-1"
+    href="{{ url_for('games_by_reviewer', reviewer_id=reviewer.id, ordering_by='review_date') }}">Sort based on date</a>
+</div>
+<hr>
+
+
+<hr>
+
+{% if games %}
+
+  {% for game in games.items %}
+
+    <div class="row my-3 p-3 bg-body rounded shadow-sm">
+      <div class="col col-md-12">
+        {% if game.image and game.image != 'default_game_image.png' %}
+        <img src="{{ url_for('static', filename='images/games_images/'+ game.image) }}" alt=""
+          class="img-responsive a_image" height="480px">
+        {% endif %}
+      </div>
+      <div class="col col-md-12">
+        <div class="main-game-title">
+          <a class="game_title" href="{{ url_for('game', game_id=game.id) }}">{{ game.title | safe }}</a>
+          <small class="game_date">({{ game.review_date }})</small>
+          <small class="game_rating">[{{ game.rating }}]</small>
+        </div>
+        <p class="main-game-partial-text">
+          {{ game.review | truncate(255) | safe }}
+        </p>
+        <p class="">Reviewed by:
+          <span>
+            <a class="reviewer-name" href="{{ url_for('games_by_reviewer', reviewer_id=game.reviewer.id) }}"> {{
+              game.reviewer.username }}
+              <img class="rounded-circle profile-image" alt="{{ game.reviewer.username }}"
+                src="{{ url_for('static', filename='images/profiles_images/'+ game.reviewer.profile_image) }}"
+                data-holder-rendered="true" data-bs-toggle="tooltip" data-bs-placement="top"
+                title="{{ game.reviewer.username }}">
+            </a>
+          </span>
+        </p>
+      </div>
+    </div>
+
+    <hr>
+
+
+  {% endfor %}
+
+
+
+  <div>
+    <!-- Εδώ θα πρέπει να μπεί ο κώδικας για το pagination της σελίδας (παρομοίως με την αρχική σελίδα) -->
+    
+    {% for page_number in games.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+      {% if page_number %}
+        {% if games.page == page_number %}
+          <a class="btn btn-primary" href="{{ url_for('games_by_reviewer', reviewer_id=reviewer.id, page=page_number) }}">{{ page_number }}</a>
+          {% else %}
+            <a class="btn btn-outline-primary" href="{{ url_for('games_by_reviewer', reviewer_id=reviewer.id, page=page_number) }}">{{ page_number }}</a>
+        {% endif %}
+
+        {% else %}
+          <span>...</span>
+      {% endif %}
+    {% endfor %}
+
+  </div>
+
+{% else %}
+<div class="alert alert-info alert-dismissible fade show" role="alert">No game review found</div>
+{% endif %}
+
+{% endblock %}

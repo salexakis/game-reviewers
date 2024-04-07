@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <div class="error_message">
+    ERROR 404! Page not found!
+  </div>
+
+  <div class="error_image_container">
+    <img class="error_image" width="1280" src="{{ url_for('static', filename='images/errors/404.jpeg') }}" alt="404 image">
+  </div>
+
+{% endblock %}
+
+

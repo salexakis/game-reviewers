@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+
+{% block content%}
+<div class="container login-container">
+  <div class="row">
+    <div class="col-md-6 login-form-1">
+      <h3>{{ page_title }}</h3>
+
+      <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <div class="mb-3">
+          {{ form.title.label(class="form-label") }}
+          {{ form.title(class="form-control", required=False) }}
+          <div id="game_titleHelp" class="form-text">Please enter the title of the game.</div>
+          {% if form.title.errors %}
+            <ul class=errors>
+            {% for error in form.title.errors %}
+              <li class="alert text-danger">{{ error }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+
+
+        <div class="mb-3">
+          {{ form.review.label(class="form-label") }}
+          {{ form.review(class="form-control", rows="5", required=False) }}
+          <div id="game_plotHelp" class="form-text">Please enter your review.</div>
+          {% if form.review.errors %}
+            <ul class=errors>
+            {% for error in form.review.errors %}
+              <li class="alert text-danger">{{ error }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+
+
+        <div class="mb-3">
+          {{ form.image.label(class="form-label") }}
+          {{ form.image(class="form-control") }}
+          <div id="game_imageHelp" class="form-text">Please enter a picture of the game.</div>
+              {% if form.image.errors %}
+              <ul class=errors>
+              {% for error in form.image.errors %}
+                <li class="alert text-danger">{{ error }}</li>
+              {% endfor %}
+              </ul>
+            {% endif %}
+        </div>
+
+
+        <div class="mb-3">
+          {{ form.rating.label(class="form-label") }}
+          {{ form.rating(class="form-control") }}
+          <div id="game_ratingHelp" class="form-text">Please enter your rating (1-10).</div>
+              {% if form.rating.errors %}
+              <ul class=errors>
+              {% for error in form.rating.errors %}
+                <li class="alert text-danger">{{ error }}</li>
+              {% endfor %}
+              </ul>
+            {% endif %}
+        </div>
+
+
+        <div class="mb-3">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+      </form>    
+
+
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}

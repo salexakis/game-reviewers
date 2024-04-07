@@ -1,0 +1,128 @@
+body {
+	background-color: #f8f9fa;
+}
+
+.container{
+	margin-top: 20px;
+}
+
+.main-game-title{
+	font-size: 2em;
+	font-weight: bold;
+	text-decoration: none;
+	color:  black;
+}
+
+.game_date,.game_date:hover{
+	font-size: 1em;
+	color:  black;
+}
+
+.main-game-partial-text,.main-game-full-text{
+	font-size: 1.5em;
+	margin-top: 20px;
+}
+
+.main-game-category{
+	color: rgba(0, 0, 0, 0.4);
+}
+
+.reviewer-name:link{
+	color: gray;
+}
+
+.reviewer-name:visited{
+	color: #696969;
+}
+
+.reviewer-name:hover{
+	color: #D3D3D3;
+}
+
+.game_title:link, .game_title:hover, .game_title:visited{
+	text-decoration: none;
+	color:  black;
+}
+
+.main-game-category:hover,.main-game-title:hover,.author-name{
+	text-decoration: underline;
+	color:  black;
+}
+
+footer{
+	color: #fff;
+	background-color: #343a40;
+}
+
+.litems,.mlink{
+	text-decoration: none;
+	/*color: #f8f9fa;*/
+	color: rgba(255,255,255,.90)!important;
+	
+}
+.litems:hover{
+	/*color: white;*/
+	color: rgba(255,255,255,10)!important;
+}
+
+.row{
+	margin-top: 20px;
+}
+
+.navbar-profile-image{
+	width: 50px;
+	height: 50px;
+}
+
+.profile-image{
+	width: 60px;
+	height: 60px;
+	margin: 10px;
+}
+
+.a_image{
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.main_header{
+	text-align: center;
+}
+
+.error_message{
+	text-align: center;
+	color: rgba(255,30,30,.90);
+	font-size: 2em;
+	font-weight: bold;
+}
+
+
+.error_image{
+	text-align: center;
+	width: 1000px;
+	margin: 10px;
+	border-radius: 15px;
+	border: 1px solid black;
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.align-buttons{
+	text-align: center;
+	/* border: 1px solid black; */
+}
+
+.btn-primary, .btn-sm {
+  background-color: #343a40 !important;
+  border: #343a40 !important;
+  margin-right: 10px;
+}
+
+.dropdown-menu[data-bs-popper] {
+	top: 100%;
+	left: -80px;
+	margin-top: .125rem;
+}

@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+  {{ game.title }}
+{% endblock title %}
+
+
+{% block content %}
+
+  <main role="main" class="container">
+
+    {% if game %}
+    <div class="row my-3 p-3 bg-body rounded shadow-sm">
+      <div class="col col-md-12">
+        {% if game.image and game.image != 'default_game_image.png' %}
+        <img src="{{ url_for('static', filename='images/games_images/'+ game.image) }}" alt="{{ game.title }}"
+          title="{{ game.title }}" class="img-responsive mx-auto d-block a_image">
+        {% endif %}
+      </div>
+      <div class="col col-md-12">
+
+        <p class="main-game-title">
+          {{ game.title }} [{{ game.rating }}]
+        </p>
+        <small class="game_date">[{{ game.review_date.strftime('%d-%m-%Y %H:%M')}}]</small>
+
+
+        <div>
+
+          {% if game.reviewer == current_user %}
+          <a class="btn btn-primary btn-sm mt-1 mb-1" href="{{ url_for('edit_game', game_id=game.id) }}">Edit</a>
+          <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal"
+            data-bs-target="#deleteModal">Delete</button>
+          {% endif %}
+
+        </div>
+
+
+        <div class="main-game-full-text">
+          {{ game.review | safe }}
+        </div>
+
+        <p class="">By
+          <span>
+            <a class="reviewer-name" href="{{ url_for('games_by_reviewer', reviewer_id=game.reviewer.id) }}">
+              {{ game.reviewer.username }}
+              <img class="rounded-circle navbar-profile-image" alt="{{ current_user.username }}"
+                src="{{ url_for('static', filename='images/profiles_images/'+ game.reviewer.profile_image) }}"
+                data-holder-rendered="true" data-bs-toggle="tooltip" data-bs-placement="top"
+                title="{{ game.reviewer.username }}">
+            </a>
+          </span>
+        </p>
+
+      </div>
+    </div>
+    {% else %}
+    <div class="alert alert-info alert-dismissible fade show" role="alert">Review not found</div>
+    {% endif %}
+
+  </main>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Delete review</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          You are about to delete this review. Are you sure?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+          <!-- Εδώ πρέπει να μπεί η φόρμα που περιέχει το κουμπί διαγραφής της ταινίας -->
+          <!-- και οδηγεί στο route διαγραφής -->
+          <form action="{{ url_for('delete_game', game_id=game.id) }}" method="POST">
+            <input type="submit" class="btn btn-danger" value="Delete review">
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
